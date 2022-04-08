@@ -8,16 +8,21 @@ const makeUser = async (newUser) => {
 };
 
 const validateUser = async (user) => {
+  console.log(user);
   const foundUser = await users.findAll({
+
     attributes: ['id', 'username', 'password'],
     where: {
       username: user.username,
       password: user.password,
+
     },
 
   });
+  console.log(Object.keys(foundUser), '**');
   if (Object.keys(foundUser).length !== 0) {
     const token = utils.createToken(user.username);
+    console.log(token);
     redis.setKey(token, user.username);
     return token;
   }

@@ -5,6 +5,7 @@ const createToken = (userName) => {
   const hash = createHmac('sha256', secret)
     .update('username')
     .digest('hex');
+  console.log('/');
   return hash;
 };
 module.exports = {
